@@ -1,0 +1,33 @@
+{
+  "name": "analyze-repos",
+  "version": "npm run tsc && git add -A dist",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "analyze-repos": "dist/lib/command.js"
+  },
+  "scripts": {
+    "test": "mocha -r ts-node/register src/**/*.spec.ts src/**/**/*.spec.ts",
+    "tsc": "tsc",
+    "tsc-version": "tsc --version",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.15.5",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
+  },
+  "test": "mocha -r ts-node/register src/**/*.spec.ts src/**/**/*.spec.ts",
+  "tsc": "tsc",
+  "tsc-version": "tsc --version",
+  "lint": "eslint src/**/*.ts",
+  "lint:fix": "eslint src/**/*.ts --fix"
+}
