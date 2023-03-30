@@ -1,0 +1,7 @@
+fullName,folder,path,name,numLines,hash,pathToRepo
+testdata/testfolder/h1.ttt,testdata/testfolder,/,h1.ttt,1,lQt+PBWrBmxVe22NU75Z3hXnjyQ=,https://github.com/pagopa/io-backend/blob/master//h1.ttt
+testdata/testfolder/dir1/f1.txt,testdata/testfolder,/dir1,f1.txt,1,Ke1UamEm+tYdtCqsrpJEMXgKqE0=,https://github.com/pagopa/io-backend/blob/master/dir1/f1.txt
+testdata/testfolder/dir1/f2.txtx,testdata/testfolder,/dir1,f2.txtx,4,K0uGw/4zKNLr2DpfAYQBS+yyTtk=,https://github.com/pagopa/io-backend/blob/master/dir1/f2.txtx
+testdata/testfolder/dir2/g1.ttt,testdata/testfolder,/dir2,g1.ttt,1,Nmu6btvLj+JXaTs1QM0R+j4hwmI=,https://github.com/pagopa/io-backend/blob/master/dir2/g1.ttt
+testdata/testfolder/dir2/dir2.1/g1.1.txt,testdata/testfolder,/dir2/dir2.1,g1.1.txt,2,mLWeiWeac482eXYPel/z7Nsk4vo=,https://github.com/pagopa/io-backend/blob/master/dir2/dir2.1/g1.1.txt
+testdata/testfolder/dir2/dir2.1/same_as_f1_in_dir1.txt,testdata/testfolder,/dir2/dir2.1,same_as_f1_in_dir1.txt,1,Ke1UamEm+tYdtCqsrpJEMXgKqE0=,https://github.com/pagopa/io-backend/blob/master/dir2/dir2.1/same_as_f1_in_dir1.txt

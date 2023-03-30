@@ -1,0 +1,2 @@
+line 1 is the same in both files
+line 2 is the same in both files
