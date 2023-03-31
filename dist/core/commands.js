@@ -11,12 +11,12 @@ function foldersToCsvFiles(topFolder, outDir, extensions) {
     });
 }
 exports.foldersToCsvFiles = foldersToCsvFiles;
-function compFoldersToCsvFiles(folder, folderForComparison, outDir, extensions) {
-    (0, compare_folders_to_csv_1.compareFoldersToCsvFile)(folder, folderForComparison, outDir, extensions).subscribe({
+function compFoldersToCsvFiles(folder, folderForComparison, outDir, extensions, pathToRepoMaster) {
+    (0, compare_folders_to_csv_1.compareFoldersToCsvFile)(folder, folderForComparison, outDir, extensions, pathToRepoMaster).subscribe({
         error: (err) => {
             throw err;
         },
     });
 }
 exports.compFoldersToCsvFiles = compFoldersToCsvFiles;
-//# sourceMappingURL=exec-command.js.map
+//# sourceMappingURL=commands.js.map

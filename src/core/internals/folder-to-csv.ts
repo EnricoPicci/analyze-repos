@@ -7,8 +7,6 @@ import { map, toArray, concatMap, tap, from, mergeMap, filter } from 'rxjs';
 import { writeFileObs, filesObs, dirNamesListObs, deleteDirObs } from 'observable-fs';
 import { toCsvObs } from '../../tools/csv/to-csv';
 
-const pathToRepoMaster = 'https://github.com/pagopa/io-backend/blob/master';
-
 export type FileRec = {
     fullName: string;
     folder: string;
@@ -18,7 +16,7 @@ export type FileRec = {
     hash: string;
     new?: boolean;
     numDiffLines?: number;
-    pathToRepo: string;
+    pathToRepo?: string;
 };
 
 export type FileRecWithContent = {
@@ -26,7 +24,7 @@ export type FileRecWithContent = {
     content: string;
 };
 
-export function folderToFileRecs(folder: string, extensions?: string[]) {
+export function folderToFileRecs(folder: string, extensions?: string[], pathToRepoMaster?: string) {
     return filesObs(folder).pipe(
         filter((fName) => {
             if (extensions === undefined) {
@@ -61,8 +59,10 @@ export function folderToFileRecs(folder: string, extensions?: string[]) {
                 name: pPath.base,
                 numLines,
                 hash,
-                pathToRepo: pathToRepoMaster + pPath.dir + '/' + pPath.base,
             };
+            if (pathToRepoMaster) {
+                fileRec.pathToRepo = pathToRepoMaster + pPath.dir + '/' + pPath.base;
+            }
             const fRecWithCoontent: FileRecWithContent = { fileRec, content };
             return fRecWithCoontent;
         }),

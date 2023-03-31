@@ -4,8 +4,9 @@
     "description": "",
     "main": "index.js",
     "bin": {
-        "analyze-repos": "dist/lib/command.js",
-        "folders-to-csv": "dist/lib/folders-to-csv.js"
+        "analyze-repos": "dist/lib/compare-to-csv.js",
+        "folders-to-csv": "dist/lib/folders-to-csv.js",
+        "compare-to-csv": "dist/lib/compare-to-csv.js"
     },
     "scripts": {
         "test": "mocha -r ts-node/register src/**/*.spec.ts src/**/**/*.spec.ts",
@@ -29,7 +30,7 @@
     },
     "dependencies": {
         "commander": "^10.0.0",
-        "observable-fs": "^2.1.8",
+        "observable-fs": "^2.1.9",
         "diff": "^5.1.0"
     }
 }

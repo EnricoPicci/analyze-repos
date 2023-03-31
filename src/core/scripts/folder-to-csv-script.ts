@@ -1,4 +1,4 @@
-import { foldersToCsvFiles } from './exec-command';
+import { foldersToCsvFiles } from '../commands';
 
 const topFolder = './test-repos';
 const outDir = './testdata/out/test-repos-out';

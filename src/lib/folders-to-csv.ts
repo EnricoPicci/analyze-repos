@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { foldersToCsvFiles } from '../core/exec-command';
+import { foldersToCsvFiles } from '../core/commands';
 
 const program = new Command();
 

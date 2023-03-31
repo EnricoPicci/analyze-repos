@@ -14,8 +14,9 @@ export function compFoldersToCsvFiles(
     folderForComparison: string,
     outDir: string,
     extensions: string[],
+    pathToRepoMaster?: string,
 ) {
-    compareFoldersToCsvFile(folder, folderForComparison, outDir, extensions).subscribe({
+    compareFoldersToCsvFile(folder, folderForComparison, outDir, extensions, pathToRepoMaster).subscribe({
         error: (err) => {
             throw err;
         },

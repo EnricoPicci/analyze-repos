@@ -8,12 +8,18 @@ import { writeFileObs } from 'observable-fs';
 import { toCsvObs } from '../../tools/csv/to-csv';
 import { folderToFileRecs } from './folder-to-csv';
 
-export function compareFoldersToFileRecs(folder: string, folderForComparison: string, extensions?: string[]) {
-    const fileRecs = folderToFileRecs(folder, extensions).pipe(toArray());
-    const filesRecsForCompare = folderToFileRecs(folderForComparison, extensions).pipe(toArray());
+export function compareFoldersToFileRecs(
+    folder: string,
+    folderForComparison: string,
+    extensions?: string[],
+    pathToRepoMaster?: string,
+) {
+    const fileRecs = folderToFileRecs(folder, extensions, pathToRepoMaster).pipe(toArray());
+    const filesRecsForCompare = folderToFileRecs(folderForComparison, extensions, pathToRepoMaster).pipe(toArray());
+    console.log('>>>>>>????****', folder, folderForComparison, extensions, pathToRepoMaster);
     return forkJoin([fileRecs, filesRecsForCompare]).pipe(
         map(([fRecs, fRecsForCompare]) => {
-            return fRecs.map((_fRec) => {
+            const fileRecs = fRecs.map((_fRec) => {
                 const _fRecForCompare = fRecsForCompare.find(
                     (_fr) => _fr.fileRec.path === _fRec.fileRec.path && _fr.fileRec.name === _fRec.fileRec.name,
                 );
@@ -30,13 +36,22 @@ export function compareFoldersToFileRecs(folder: string, folderForComparison: st
                 _fRec.fileRec.numDiffLines = dLines.length;
                 return _fRec.fileRec;
             });
+            return fileRecs;
         }),
         concatMap((fRecs) => from(fRecs)),
     );
 }
 
-export function compareFoldersToCsv(folder: string, folderForComparison: string, extensions?: string[]) {
-    return compareFoldersToFileRecs(folder, folderForComparison, extensions).pipe(toCsvObs(), toArray());
+export function compareFoldersToCsv(
+    folder: string,
+    folderForComparison: string,
+    extensions?: string[],
+    pathToRepoMaster?: string,
+) {
+    return compareFoldersToFileRecs(folder, folderForComparison, extensions, pathToRepoMaster).pipe(
+        toCsvObs(),
+        toArray(),
+    );
 }
 
 export function compareFoldersToCsvFile(
@@ -44,6 +59,7 @@ export function compareFoldersToCsvFile(
     folderForComparison: string,
     outDir: string,
     extensions?: string[],
+    pathToRepoMaster?: string,
 ) {
     folder = path.normalize(folder);
     folderForComparison = path.normalize(folderForComparison);
@@ -51,10 +67,12 @@ export function compareFoldersToCsvFile(
         outDir,
         `${folder.replace(/\//g, '_')}_vs_${folderForComparison.replace(/\//g, '_')}.csv`,
     );
-    return compareFoldersToCsv(folder, folderForComparison, extensions).pipe(
+
+    return compareFoldersToCsv(folder, folderForComparison, extensions, pathToRepoMaster).pipe(
         concatMap((csvLines) => writeFileObs(csvFileName, csvLines)),
-        tap(() =>
-            console.log(`csv ${csvFileName} written for folder ${folder} compared with folder ${folderForComparison}`),
-        ),
+        tap(() => {
+            console.log(`csv ${csvFileName} written in directory ${outDir}`);
+            console.log(`Folder ${folder} compared with folder ${folderForComparison}`);
+        }),
     );
 }

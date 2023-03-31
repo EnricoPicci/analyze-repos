@@ -10,8 +10,7 @@ const crypto_1 = __importDefault(require("crypto"));
 const rxjs_1 = require("rxjs");
 const observable_fs_1 = require("observable-fs");
 const to_csv_1 = require("../../tools/csv/to-csv");
-const pathToRepoMaster = 'https://github.com/pagopa/io-backend/blob/master';
-function folderToFileRecs(folder, extensions) {
+function folderToFileRecs(folder, extensions, pathToRepoMaster) {
     return (0, observable_fs_1.filesObs)(folder).pipe((0, rxjs_1.filter)((fName) => {
         if (extensions === undefined) {
             return true;
@@ -44,8 +43,10 @@ function folderToFileRecs(folder, extensions) {
             name: pPath.base,
             numLines,
             hash,
-            pathToRepo: pathToRepoMaster + pPath.dir + '/' + pPath.base,
         };
+        if (pathToRepoMaster) {
+            fileRec.pathToRepo = pathToRepoMaster + pPath.dir + '/' + pPath.base;
+        }
         const fRecWithCoontent = { fileRec, content };
         return fRecWithCoontent;
     }));
